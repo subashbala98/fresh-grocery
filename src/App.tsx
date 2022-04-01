@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import React, { Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { Route, Routes } from "react-router-dom";
+import Header from "./Components/Header/Header";
+const AllProducts = React.lazy(() => import("./Pages/AllProducts"));
+const ProductsList = React.lazy(() => import("./Pages/ProductsList"));
+const AddProducts = React.lazy(() => import("./Pages/AddProducts"));
+const queryClient = new QueryClient();
+const App = () => (
+  <div className="mr-8 ml-8">
+    <QueryClientProvider client={queryClient}>
+      <Header />
+      <Suspense fallback={<></>}>
+        <Routes>
+          <Route path="/" element={<AllProducts />} />
+          <Route path="list" element={<ProductsList />} />
+          <Route path="add" element={<AddProducts />} />
+        </Routes>
+      </Suspense>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </div>
+);
 
 export default App;

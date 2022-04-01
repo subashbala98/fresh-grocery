@@ -1,0 +1,20 @@
+.nav_container{
+    border-bottom: 1px solid #ddd;
+}
+.applogo{
+    width: 35%;
+    object-fit: contain;
+}
+.logo_container{
+flex: 20%;
+}
+.list_container{
+flex: 80%;
+}
+a{
+    color: black;
+}
+.activeLink{
+    border-bottom: 4px solid var(--fresh-primary);
+    font-size: 18px;
+}
