@@ -7,6 +7,7 @@ export interface ProductsModel {
   productCost: number;
   productCategory: { id: 1; label: "" };
   productImage: string;
+  productDbId?: string;
 }
 const dropdownData: DropDownModel[] = [
   { id: 1, label: "Fruits and Vegetables" },

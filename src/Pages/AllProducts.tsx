@@ -7,34 +7,36 @@ import fbBaseURL from "../utilities/axios";
 import { useState } from "react";
 const getAllProducts = () => fbBaseURL.get("/allProducts.json");
 const AllProducts = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [categoryValue, setCategoryValue] = useState("");
+  const [FilterValue, setFilterValue] = useState({
+    searchValue: "",
+    categoryValue: "",
+  });
   const { data, isLoading } = useQuery(["allProducts"], getAllProducts);
   let getAllProductsData: ProductsModel[] = [];
   if (data?.data) {
     for (const key in data.data) {
-      getAllProductsData.push(data.data[key]);
+      getAllProductsData.push({ ...data.data[key], productDbId: key });
     }
   }
   //** Dropdown search */
-  if (categoryValue.length > 1) {
+  if (FilterValue.categoryValue.length > 1) {
     getAllProductsData =
       getAllProductsData.length > 1
         ? getAllProductsData.filter((f) =>
             f.productCategory.label
               .toLocaleLowerCase()
-              .includes(categoryValue.toLowerCase())
+              .includes(FilterValue.categoryValue.toLowerCase())
           )
         : getAllProductsData;
   }
   //** Input search value */
-  if (searchValue.length >= 1) {
+  if (FilterValue.searchValue.length >= 1) {
     getAllProductsData =
       getAllProductsData.length > 1
         ? getAllProductsData.filter((f) =>
             f.productName
               .toLocaleLowerCase()
-              .includes(searchValue.toLowerCase())
+              .includes(FilterValue.searchValue.toLowerCase())
           )
         : getAllProductsData;
   }
@@ -43,12 +45,14 @@ const AllProducts = () => {
       <div className="flex justify-content-around align-items-center">
         <InputText
           className="search_text"
-          onChange={(e) => setSearchValue(e.target.value)}
-          value={searchValue}
+          onChange={(e) =>
+            setFilterValue({ ...FilterValue, searchValue: e.target.value })
+          }
+          value={FilterValue.searchValue}
         />
         <DropdownList
           getCategory={(response: DropDownModel) =>
-            setCategoryValue(response.label)
+            setFilterValue({ ...FilterValue, categoryValue: response.label })
           }
         />
       </div>

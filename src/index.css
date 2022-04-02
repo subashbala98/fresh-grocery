@@ -71,3 +71,23 @@ input[type=number] {
     top: 30px;
     right: 250px;
 }
+
+.table_image{
+  position: relative;
+    top: 7px;
+    right: 6px
+}
+
+.editIcon{
+  cursor: pointer;
+  width: 15%;
+}
+.editIcon i{
+  padding: 5px;
+}
+
+.editBtn{
+  position: relative !important;
+    bottom: 50px !important;
+    left: 41px !important;
+}
