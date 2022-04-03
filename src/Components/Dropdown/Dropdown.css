@@ -1,0 +1,7 @@
+.p-dropdown{
+    border: 1px solid var(--fresh-primary) !important;
+    width: 250px !important;
+  }
+.resetDropdown{
+  cursor: pointer !important;
+}

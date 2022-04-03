@@ -7,6 +7,7 @@ import { Toast } from "primereact/toast";
 import fbBaseURL from "../utilities/axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import InputField from "../Components/InputField/InputField";
+import Card from "../Components/Card/Card";
 const AddProducts = () => {
   const [editProduct, setEditProduct] = useState(false);
   const navigate = useNavigate();
@@ -112,14 +113,11 @@ const AddProducts = () => {
     },
     validate: validate,
   });
-  const displayValidation = {
-    display: editProduct ? "none" : "block",
-  };
   return (
     <>
       <Toast ref={toast} />
 
-      <div className="flex align-align-items-center justify-content-evenly">
+      <div className="flex align-items-center justify-content-evenly">
         <form onSubmit={formik.handleSubmit} className="add_product">
           <h3 className="mt-5 mb-5">
             {editProduct
@@ -154,7 +152,7 @@ const AddProducts = () => {
               <small className="p-error">{formik.errors.productCost}</small>
             )}
           </div>
-          <div className="mt-6 mb-6">
+          <div className="mt-6 mb-6 formDropDowm">
             <Dropdown
               name="productCategory"
               value={formik.values.productCategory}
@@ -184,42 +182,61 @@ const AddProducts = () => {
               <small className="p-error">{formik.errors.productImage}</small>
             )}
           </div>
-          <div className="mt-6 mb-6 flex justify-content-between">
-            <Button
-              style={displayValidation}
-              type="submit"
-              label="Add Product"
-              className="p-button-success p-button-rounded"
-            />
-            <Button
-              style={displayValidation}
-              label="Cancel"
-              type="reset"
-              onClick={(e) => {
-                formik.resetForm();
-                toast.current.show({
-                  severity: "info",
-                  summary: "Cancel Message",
-                  detail: "New Product Cancelled Successfully",
-                  life: 3000,
-                });
-              }}
-              className="p-button-warning p-button-rounded"
-            />
-          </div>
-          <div
-            style={{
-              display: editProduct ? "block" : "none",
-            }}
-          >
-            <Button
-              type="submit"
-              label="Add Edit Product"
-              className="p-button-success p-button-rounded editBtn"
-            />
-          </div>
+          {!editProduct && (
+            <div className="mt-6 mb-6 flex justify-content-between">
+              <Button
+                type="submit"
+                label="Add Product"
+                className="p-button-success p-button-rounded"
+              />
+              <Button
+                label="Cancel"
+                type="reset"
+                onClick={(e) => {
+                  formik.resetForm();
+                  toast.current.show({
+                    severity: "info",
+                    summary: "Cancel Message",
+                    detail: "New Product Cancelled Successfully",
+                    life: 3000,
+                  });
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 1000);
+                }}
+                className="p-button-warning p-button-rounded"
+              />
+            </div>
+          )}
+          {editProduct && (
+            <div>
+              <Button
+                type="submit"
+                label="Add Edit Product"
+                className="mt-7 p-button-success p-button-rounded editBtn"
+              />
+            </div>
+          )}
         </form>
-        <div></div>
+
+        {editProduct && (
+          <div>
+            <div>
+              <img
+                className="displayImage"
+                alt={getEditProductDetails.productName}
+                src={getEditProductDetails.productImage}
+              />
+            </div>
+            <div className="flex align-items-center justify-content-evenly">
+              <h3>{getEditProductDetails.productName}</h3>
+              <p>
+                &#8377;
+                {`${getEditProductDetails.productCost}`}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -35,11 +35,25 @@ a{
 }
 .p-dropdown{
   border: 1px solid var(--fresh-primary) !important;
+ 
+}
+.formDropDowm .p-dropdown{
   width: 250px !important;
+}
+.p-datatable .p-sortable-column.p-highlight {
+  background:var(--fresh-outline) !important ;
+  color:var(--fresh-light-gray)  !important;
+}
+.p-datatable .p-sortable-column:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--fresh-outline)  !important;
+  outline: 0 none;
 }
 .p-dropdown:not(.p-disabled).p-focus{
   box-shadow: 0 0 0 0.1rem var(--fresh-primary)  !important;
   border-color:var(--fresh-primary)  !important;
+}
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color:var(--fresh-light-gray)  !important;
 }
 .p-inputtext:enabled:focus {
   box-shadow: 0 0 0 0.1rem var(--fresh-outline)  !important;
@@ -90,4 +104,42 @@ input[type=number] {
   position: relative !important;
     bottom: 50px !important;
     left: 41px !important;
+}
+
+.p-datatable-thead tr th{
+  width: 300px !important;
+}
+
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: var(--fresh-outline) !important;
+  border-color:var(--fresh-primary)  !important;
+  color:var(--fresh-light-gray)  !important;
+}
+
+.p-link:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem var(--fresh-primary)  !important;
+}
+.clearAlignment{
+    cursor: pointer !important; 
+    left: 210px !important;
+}
+
+.cleatAlignmentHome{
+  position: relative;
+  right: 153px;
+  cursor: pointer;
+}
+.resetDropdown{
+  cursor: pointer !important;
+}
+.pi{
+  color: #6c757d !important;
+}
+
+.displayImage{
+  width: 400px;
+    height: 300px;
 }
